@@ -1,0 +1,62 @@
+#assignment 2.2
+
+#Answer 1
+#load this rjson package to read the JSON files
+library(rjson)
+
+js1<- fromJSON(file = "text1.json")
+js1  
+js2<- fromJSON(file = "text2.json")
+js2
+js3<- fromJSON(file = "text3.json")
+js3
+
+final_js<- data.frame(js1,js2,js3)
+print(final_js)
+
+
+#Answer 2
+#we are given this
+js<-'{
+"name": null, "release_date_local": null, "title": "3 (2011)",
+"opening_weekend_take": 1234, "year": 2011,
+"release_date_wide": "2011-09-16", "gross": 59954
+}'
+js4<- fromJSON(js.json)
+js4
+
+
+#& now we will use the function as.data.frame() to convert it into R data frame
+js<- data.frame(js4)
+js
+
+#chk
+js<- as.data.frame(js4)
+js
+
+
+#Answer 3
+
+#Binning refers to dividing a list of continuous variables into groups. It is done to discover set of patterns 
+#in continuous variables, which are difficult to analyze otherwise.
+
+#we use cs2m dataset..and do binning on "BP" variable
+
+k<-read.csv("D:/acadgild.csv")
+str(k)
+summary(k$BP)
+#using within() function
+
+l=k
+summary(l)
+View(l)
+
+l<- within(l,{
+          BPcat<- NA
+          BPcat[BP>=95 & BP<=120] <- "ideal BP"
+          BPcat[BP>=121 & BP<=140] <- "pre-high BP"
+          BPcat[BP>=141] <- "high BP"
+})
+head(l)
+tail(l)
+l
